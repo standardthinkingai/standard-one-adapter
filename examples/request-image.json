@@ -1,0 +1,20 @@
+{
+  "model": "decision-model",
+  "state": "첨부된 이미지의 내용을 판단하세요. 여러 이미지가 있으면 입력 순서대로 비교하세요.",
+  "questions": {
+    "dominant_color": {
+      "type": "choice",
+      "instructions": "첫 번째 이미지에서 가장 넓은 영역을 차지하는 색상은 무엇인가요?",
+      "criteria": {
+        "red": "빨간색",
+        "green": "초록색",
+        "blue": "파란색"
+      }
+    }
+  },
+  "options": {
+    "temperature": 1.0,
+    "permutations": 1,
+    "return_logprobs": false
+  }
+}

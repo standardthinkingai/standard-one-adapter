@@ -1,0 +1,13 @@
+{
+  "model": "jev-latest",
+  "state": "결제가 두 번 되었습니다. 중복 결제 건을 환불해 주세요.",
+  "questions": {
+    "route": {
+      "type": "choice",
+      "instructions": "어느 부서로 보내야 하나?",
+      "criteria": {"billing": "결제 및 환불", "technical": "기술 지원", "sales": "상품 문의"}
+    },
+    "refund": {"type": "noul", "instructions": "환불을 요청했나?"},
+    "urgency": {"type": "score", "instructions": "대응 긴급도", "criteria": ["낮음", "보통", "높음"]}
+  }
+}

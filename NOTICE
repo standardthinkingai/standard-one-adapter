@@ -1,0 +1,19 @@
+Jev adapter
+
+The initial protocol helpers and their unit tests were extracted from the
+System One extension in the local sglang-jev experiment, commit
+633f05e (Add prefill-only System One decisions and visual game evaluation).
+That repository was based on SGLang upstream commit
+0024efa0de38794ee309ba10ab00ebb891a3d050.
+
+The accompanying Apache License 2.0 is retained from that source tree.
+SGLang project: https://github.com/sgl-project/sglang
+
+This repository is an independent API adapter. It does not include the
+proprietary Jev model and does not bundle the SGLang inference engine.
+
+Benchmark metric definitions and dataset schema mapping follow Jared Palmer's
+Apache-2.0 KEV project, pinned at 4f8110a3f8620cc3a182ae9a708e4398492c4b1a:
+https://github.com/jaredpalmer/kev
+The benchmark runner is an independent implementation. Downloaded benchmark
+data retains upstream provenance and any underlying dataset license terms.

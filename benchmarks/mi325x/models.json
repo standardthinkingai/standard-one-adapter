@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "baseline": "official_checkpoints_without_additional_training",
+  "hardware_validation": "pending",
+  "engine": {
+    "repository": "https://github.com/sgl-project/sglang",
+    "version": "0.5.20",
+    "install_kind": "official_rocm_container",
+    "image_tag": "lmsysorg/sglang:v0.5.20-rocm724-mi30x",
+    "image_digest": null,
+    "digest_validation": "resolve_and_verify_with_lock_image_on_prepared_host",
+    "rocm_series": "7.2",
+    "rocm_image_version": "7.2.4",
+    "target_gpu": "MI325X",
+    "target_architecture": "gfx942",
+    "hardware_validation": "pending",
+    "source_checked_on": "2026-09-21",
+    "support_evidence": [
+      "https://hub.docker.com/r/lmsysorg/sglang/tags?name=rocm",
+      "https://docs.sglang.io/docs/hardware-platforms/amd_gpu",
+      "https://rocm.docs.amd.com/en/latest/reference/gpu-specs.html",
+      "https://rocm.docs.amd.com/projects/HIP/en/docs-7.1.1/reference/env_variables.html"
+    ],
+    "validation_note": "Published mi30x image candidate only. Exact digest, installed packages, MI325X kernels and all four text-scoring paths require on-server validation. H200 success does not establish ROCm support."
+  },
+  "defaults": {
+    "context_length": 8192,
+    "max_running_requests": 32,
+    "mem_fraction_static": 0.8,
+    "tensor_parallel_size": 1,
+    "engine_port": 30000,
+    "adapter_port": 30120,
+    "served_model_name": "decision-model",
+    "cache_policy": "full_prefill_no_vision_embedding_reuse",
+    "environment": {
+      "SGLANG_VLM_CACHE_SIZE_MB": "0"
+    }
+  },
+  "default_matrix": [
+    "qwen35-4b-bf16",
+    "qwen36-27b-bf16",
+    "qwen36-35b-a3b-bf16",
+    "ministral3-3b-bf16"
+  ],
+  "models": {
+    "ministral3-3b-bf16": {
+      "repo_id": "mistralai/Ministral-3-3B-Instruct-2512-BF16",
+      "revision": "b6d637bef2393152b3da2b2fde72eecdee30557e",
+      "architecture": "Mistral3ForConditionalGeneration",
+      "checkpoint_precision": "Official BF16 checkpoint; no additional training or LoRA",
+      "dtype": "bfloat16",
+      "quantization": null,
+      "extra_engine_args": [
+        "--model-config-parser",
+        "hf",
+        "--load-format",
+        "safetensors"
+      ],
+      "config_source": "https://huggingface.co/mistralai/Ministral-3-3B-Instruct-2512-BF16/blob/b6d637bef2393152b3da2b2fde72eecdee30557e/config.json",
+      "tokenization": "native_official_text",
+      "hardware_validation": "pending",
+      "input_modes_to_validate": [
+        "text"
+      ],
+      "vision_validation": "unsupported_native_text_tokenizer",
+      "vision_note": "Official native tokenizer path only supports text. Do not use the failing HTTP token roundtrip for image inputs; report image comparison as unsupported."
+    },
+    "qwen35-4b-bf16": {
+      "repo_id": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "architecture": "Qwen3_5ForConditionalGeneration",
+      "checkpoint_precision": "BF16 weights; selected non-matmul states may remain FP32",
+      "dtype": "bfloat16",
+      "quantization": null,
+      "extra_engine_args": [],
+      "config_source": "https://huggingface.co/Qwen/Qwen3.5-4B/blob/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/config.json",
+      "tokenization": "engine_http_chat",
+      "hardware_validation": "pending",
+      "input_modes_to_validate": [
+        "text",
+        "image"
+      ],
+      "vision_validation": "pending_runtime_probe",
+      "vision_note": "Candidate for matched rendered-image comparisons; --probe-vision must pass before image benchmark runs. No MI325X image-scoring result yet."
+    },
+    "qwen36-27b-bf16": {
+      "repo_id": "Qwen/Qwen3.6-27B",
+      "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+      "architecture": "Qwen3_5ForConditionalGeneration",
+      "checkpoint_precision": "BF16 weights; selected non-matmul states may remain FP32",
+      "dtype": "bfloat16",
+      "quantization": null,
+      "extra_engine_args": [],
+      "config_source": "https://huggingface.co/Qwen/Qwen3.6-27B/blob/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9/config.json",
+      "tokenization": "engine_http_chat",
+      "hardware_validation": "pending",
+      "input_modes_to_validate": [
+        "text",
+        "image"
+      ],
+      "vision_validation": "pending_runtime_probe",
+      "vision_note": "Candidate for matched rendered-image comparisons; --probe-vision must pass before image benchmark runs. No MI325X image-scoring result yet."
+    },
+    "qwen36-35b-a3b-bf16": {
+      "repo_id": "Qwen/Qwen3.6-35B-A3B",
+      "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+      "architecture": "Qwen3_5MoeForConditionalGeneration",
+      "checkpoint_precision": "BF16 weights; selected non-matmul states may remain FP32",
+      "dtype": "bfloat16",
+      "quantization": null,
+      "extra_engine_args": [],
+      "config_source": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B/blob/995ad96eacd98c81ed38be0c5b274b04031597b0/config.json",
+      "tokenization": "engine_http_chat",
+      "hardware_validation": "pending",
+      "input_modes_to_validate": [
+        "text",
+        "image"
+      ],
+      "vision_validation": "pending_runtime_probe",
+      "vision_note": "Candidate for matched rendered-image comparisons; --probe-vision must pass before image benchmark runs. No MI325X image-scoring result yet."
+    }
+  }
+}
